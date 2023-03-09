@@ -1,0 +1,16 @@
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+         unordered_set<ListNode*>temp;
+       if(head==NULL)
+       return NULL;
+       while(head!=NULL)
+       {
+           temp.insert(head);
+           head = head->next;
+           if(temp.find(head)!=temp.end())
+           return head;
+       }
+       return NULL;
+    }
+};
