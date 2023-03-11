@@ -1,0 +1,25 @@
+class Solution {
+public:
+     TreeNode *solve(ListNode *head,  ListNode *end){
+    
+    if(head == end)
+        return nullptr;
+    
+    ListNode *slow = head, *fast = head;
+    while(fast != end and fast->next != end){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    TreeNode *temp = new TreeNode(slow->val);
+    temp->left = solve(head, slow);
+    temp->right = solve(slow->next, end);
+    
+    return temp;
+}
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        return solve(head, nullptr);
+        
+    }
+};
