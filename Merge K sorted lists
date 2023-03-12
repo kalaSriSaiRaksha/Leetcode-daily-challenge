@@ -1,0 +1,57 @@
+class Solution {
+	ListNode* merge(ListNode* a , ListNode* b){
+		ListNode* head = NULL , *tail = NULL;
+		while(a and b){
+			ListNode* temp;
+			if(a->val > b->val){
+				temp = b;
+				b = b->next;
+			}
+			else {
+				temp = a;
+				a = a->next;
+			}
+			if(!head) {
+				head = temp;
+				tail = temp;
+			}
+			else {
+				tail->next = temp;
+				tail = temp;
+			}
+		}
+
+		if(a) {
+			if(!head) {
+				head = a;
+				tail = a;
+			}
+			else {
+				tail->next = a;
+				tail = a;
+			}
+		}
+
+		if(b){
+			if(!head) {
+				head = b;
+				tail = b;
+			}
+			else {
+				tail->next = b;
+				tail = b;
+			}
+		}
+
+		return head;
+	}
+public:
+	ListNode* mergeKLists(vector<ListNode*>& arr) {
+		int n = arr.size();
+		ListNode* temp = NULL;
+		for(int i = n-1 ; i >= 0 ; i--){
+			temp = merge(arr[i] ,temp);
+		}
+		return temp;
+	}
+};
