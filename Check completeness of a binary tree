@@ -1,0 +1,11 @@
+queue<TreeNode*> queue;
+        bool pre=true;
+        queue.push(root);
+        while(!queue.empty()){
+            root=queue.front();
+            queue.pop();
+            if(root==NULL){pre=false; continue;}
+            if(pre==false && root!=NULL)return false;
+            queue.push(root->left);queue.push(root->right);
+        }
+        return true;
