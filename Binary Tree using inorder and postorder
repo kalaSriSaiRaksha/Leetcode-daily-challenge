@@ -1,0 +1,22 @@
+TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder,unordered_map<int,int>&mp,int &index,int l,int h){
+        if(l>h){
+            return NULL;
+        }
+        TreeNode* root=new TreeNode(postorder[index]);
+        int mid=mp[postorder[index]];
+         
+        index--;
+        root->right=buildTree(inorder,postorder,mp,index,mid+1,h);
+        root->left=buildTree(inorder,postorder,mp,index,l,mid-1);
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        int n=inorder.size();
+        int index=n-1;
+        unordered_map<int,int>mp;
+        for(int i=0;i<n;i++){
+             mp[inorder[i]]=i;
+        }
+        TreeNode* root=buildTree(inorder,postorder,mp,index,0,n-1);
+        return root;
+        
